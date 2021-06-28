@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "684530418493",
+    "project_id": "joveslectors-2ebe4",
+    "storage_bucket": "joveslectors-2ebe4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684530418493:android:1096d7a994f90a1e9e3b54",
+        "android_client_info": {
+          "package_name": "com.joveslectors"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684530418493-c5ai248u8klhpimicjjob72c8mc5q604.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQ07AEfCtdxPxYJuL311fXUXN5OYyER1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "684530418493-c5ai248u8klhpimicjjob72c8mc5q604.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
