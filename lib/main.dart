@@ -16,6 +16,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Future<FirebaseApp> initializeFirebase () async {
     var firebase = await Firebase.initializeApp();
+    print(await FirebaseMessaging.instance.getToken()); //TOKEN DEL DISPOSITIVO (unico por dispositivo) guardar en la base de datos si se quiere enviar notificaciones a este user
+    await FirebaseMessaging.instance.subscribeToTopic("test"); //Mandar notificaciones por topics en vez de por dispositivos
     FirebaseMessaging.onMessage.listen((message) {
       if(message.notification != null) {
         print(message.notification?.body);
