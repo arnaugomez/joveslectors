@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:joveslectors/push_notification_message.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,42 +15,42 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Future<FirebaseApp> initializeFirebase () async {
+  Future<FirebaseApp> initializeFirebase() async {
     var firebase = await Firebase.initializeApp();
-    print(await FirebaseMessaging.instance.getToken()); //TOKEN DEL DISPOSITIVO (unico por dispositivo) guardar en la base de datos si se quiere enviar notificaciones a este user
-    await FirebaseMessaging.instance.subscribeToTopic("test"); //Mandar notificaciones por topics en vez de por dispositivos
+    print(await FirebaseMessaging.instance
+        .getToken()); //TOKEN DEL DISPOSITIVO (unico por dispositivo) guardar en la base de datos si se quiere enviar notificaciones a este user
+    await FirebaseMessaging.instance.subscribeToTopic(
+        "news"); //Mandar notificaciones por topics en vez de por dispositivos
     FirebaseMessaging.onMessage.listen((message) {
-      if(message.notification != null) {
-        print(message.notification?.body);
-        print(message.notification?.title);
-      }
+      final notification = PushNotificationMessage(
+          title: message.notification!.title!,
+          body: message.notification!.body!);
+      print(notification);
     });
     return firebase;
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: FutureBuilder(
-          // Initialize FlutterFire:
           future: initializeFirebase(),
           builder: (context, snapshot) {
-            // Check for errors
             if (snapshot.hasError) {
               return Center(child: Text("La hemos liado"));
             }
 
-            // Once complete, show your application
             if (snapshot.connectionState == ConnectionState.done) {
-              return Center(child: Text("Conectado a Firebase"));
+              return Center(
+                  child: Text(
+                      "Conectado a Firebase")); //WebViewContainer("https://jornades.joveslectors.cat"),
             }
 
-            // Otherwise, show something whilst waiting for initialization to complete
-            return Center(child: Text("Cargando"));
+            return Center(child: CircularProgressIndicator());
           },
         ),
       ),
     );
   }
 }
-
